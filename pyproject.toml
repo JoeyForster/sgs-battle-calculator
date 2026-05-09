@@ -1,0 +1,22 @@
+[project]
+name = "sgs-battle-calculator"
+version = "0.1.0"
+description = "Local SGS battle-core calculator with a FastAPI web UI."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.111,<1",
+    "pydantic>=2.7,<3",
+    "uvicorn[standard]>=0.30,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "httpx>=0.27,<1",
+    "pytest>=8.2,<9",
+]
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider"
+pythonpath = ["."]
+testpaths = ["tests"]

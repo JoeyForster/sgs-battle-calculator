@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SGS Turn Calculator</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">SGS tabletop assistant</p>
+        <h1>Turn Calculator</h1>
+      </div>
+      <div class="scoreboard">
+        <label>
+          Scenario preset
+          <div class="inline-control">
+            <select id="scenarioPreset"></select>
+            <button id="loadPreset" type="button">Load</button>
+          </div>
+        </label>
+        <label>
+          Scenario
+          <input id="scenarioName" type="text" />
+        </label>
+        <label>
+          Turn
+          <input id="turnNumber" type="number" min="1" />
+        </label>
+        <label>
+          Target Victory Points
+          <input id="targetVp" type="number" min="1" />
+        </label>
+        <div class="score-tile attacker">
+          <span id="attackerLabel">Attackers</span>
+          <strong id="attackerVp">0</strong>
+        </div>
+        <div class="score-tile defender">
+          <span id="defenderLabel">Defenders</span>
+          <strong id="defenderVp">0</strong>
+        </div>
+        <button id="themeToggle" type="button" class="theme-toggle">Dark Mode</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="panel library-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Unit Library</h2>
+            <p id="libraryCount">0 units</p>
+          </div>
+          <div class="button-row">
+            <button id="saveState" type="button">Save</button>
+            <button id="resetState" type="button" class="danger">Reset</button>
+          </div>
+        </div>
+
+        <form id="unitForm" class="unit-form">
+          <div class="field-grid two">
+            <label>
+              Unit name
+              <input id="unitName" type="text" required />
+            </label>
+            <label>
+              Country
+              <input id="unitCountry" type="text" />
+            </label>
+          </div>
+
+          <div class="segmented" aria-label="Side">
+            <input id="sideAttacker" type="radio" name="unitSide" value="attacker" checked />
+            <label id="sideAttackerLabel" for="sideAttacker">Attackers</label>
+            <input id="sideDefender" type="radio" name="unitSide" value="defender" />
+            <label id="sideDefenderLabel" for="sideDefender">Defenders</label>
+          </div>
+
+          <div class="field-grid three">
+            <label>
+              Domain
+              <select id="unitDomain">
+                <option value="land">Land</option>
+                <option value="air">Air</option>
+              </select>
+            </label>
+            <label>
+              Role
+              <select id="unitRole">
+                <option value="combat">Combat</option>
+                <option value="support">Support</option>
+              </select>
+            </label>
+            <label>
+              Type
+              <select id="unitType">
+                <option value="standard">Standard</option>
+                <option value="armor">Armored</option>
+                <option value="artillery">Artillery</option>
+                <option value="mine">Mine</option>
+                <option value="fighter">Fighter</option>
+                <option value="bomber">Bomber</option>
+                <option value="cas">Close Air Support</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="stat-grid">
+            <label title="Current hits or strength points">
+              Current Health
+              <input id="unitStrength" type="number" min="0" max="30" value="3" />
+            </label>
+            <label title="Maximum hits or strength points">
+              Maximum Health
+              <input id="unitMaxStrength" type="number" min="1" max="30" value="3" />
+            </label>
+            <label title="Stacking value, tracked for reference">
+              Stacking Value
+              <input id="unitStacking" type="number" min="0" max="20" value="1" />
+            </label>
+            <label title="Attack factor">
+              Attack Factor
+              <input id="unitAttack" type="number" min="0" max="9" value="3" />
+            </label>
+            <label title="Defense factor">
+              Defense Factor
+              <input id="unitDefense" type="number" min="0" max="9" value="3" />
+            </label>
+            <label title="Morale factor">
+              Morale Factor
+              <input id="unitMorale" type="number" min="0" max="9" value="3" />
+            </label>
+            <label title="Rate of fire">
+              Rate of Fire
+              <input id="unitRof" type="number" min="1" max="5" value="1" />
+            </label>
+          </div>
+
+          <div class="trait-picker">
+            <span>Traits</span>
+            <label><input type="checkbox" name="unitTrait" value="elite" /> Elite</label>
+            <label><input type="checkbox" name="unitTrait" value="pursuit" /> Pursuer</label>
+            <label><input type="checkbox" name="unitTrait" value="breakthrough" /> Breakthrough</label>
+            <label><input type="checkbox" name="unitTrait" value="recon" /> Recon</label>
+          </div>
+
+          <button class="primary full" type="submit">Add Unit To Library</button>
+        </form>
+
+        <div class="filter-row">
+          <input id="unitSearch" type="search" placeholder="Search units" />
+          <select id="unitSideFilter">
+            <option value="all">All</option>
+            <option value="attacker">Attackers</option>
+            <option value="defender">Defenders</option>
+          </select>
+        </div>
+
+        <div id="unitLibrary" class="unit-list"></div>
+      </aside>
+
+      <section class="center-column">
+        <section class="panel battle-panel">
+          <div class="battle-toolbar">
+            <button id="runBattle" type="button" class="start-button">Start Battle</button>
+            <label class="battle-name">
+              Battle name
+              <input id="battleName" type="text" />
+            </label>
+            <label>
+              Seed
+              <input id="seed" type="number" />
+            </label>
+            <label>
+              Province size
+              <input id="provinceSize" type="number" min="0" value="0" />
+            </label>
+          </div>
+
+          <div class="battle-settings">
+            <label>
+              Attacker Side Name
+              <input id="attackerName" type="text" />
+            </label>
+            <label>
+              Defender Side Name
+              <input id="defenderName" type="text" />
+            </label>
+            <label>
+              Max Battle Phases
+              <input id="maxNextRounds" type="number" min="0" max="3" />
+            </label>
+            <label class="checkbox-line">
+              <input id="defenderEntrenched" type="checkbox" />
+              Defender entrenched
+            </label>
+          </div>
+
+          <div class="battle-grid">
+            <section class="side-panel attacker-side">
+              <div class="side-heading">
+                <div>
+                  <p>Battle Morale</p>
+                  <strong id="attackerBmPreview">0</strong>
+                </div>
+                <h2 id="attackerStackTitle">Attackers</h2>
+                <button id="clearAttackers" type="button">Clear</button>
+              </div>
+              <div id="attackerStack" class="stack-list"></div>
+            </section>
+
+            <section class="side-panel defender-side">
+              <div class="side-heading">
+                <div>
+                  <p>Battle Morale</p>
+                  <strong id="defenderBmPreview">0</strong>
+                </div>
+                <h2 id="defenderStackTitle">Defenders</h2>
+                <button id="clearDefenders" type="button">Clear</button>
+              </div>
+              <div id="defenderStack" class="stack-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="panel result-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Battle Result</h2>
+              <p id="resultStatus">No battle resolved yet</p>
+            </div>
+            <div class="button-row">
+              <button id="applyTurn" type="button" class="primary" disabled>End Turn / Apply Losses</button>
+              <button id="exportJson" type="button">View JSON</button>
+            </div>
+          </div>
+          <div id="battleSummary" class="summary-grid"></div>
+          <div id="roundTimeline" class="round-timeline"></div>
+        </section>
+      </section>
+
+      <aside class="panel modifier-panel">
+        <nav class="tool-tabs" aria-label="Reference panels">
+          <button type="button" data-tool-tab="terrain" class="selected">Terrain</button>
+          <button type="button" data-tool-tab="cards">Cards</button>
+          <button type="button" data-tool-tab="glossary">Glossary</button>
+        </nav>
+
+        <section data-tool-panel="terrain">
+          <div class="panel-header compact">
+            <div>
+              <h2>Terrain</h2>
+              <p id="selectedTerrainLabel">Clear</p>
+            </div>
+          </div>
+          <input id="terrainSearch" type="search" placeholder="Search terrain" />
+          <div id="terrainList" class="terrain-list"></div>
+        </section>
+
+        <section class="card-section" data-tool-panel="cards" hidden>
+          <div class="panel-header compact">
+            <div>
+              <h2>Cards & Modifiers</h2>
+              <p id="activeCardCount">0 active</p>
+            </div>
+          </div>
+          <input id="cardSearch" type="search" placeholder="Search cards" />
+          <div id="cardList" class="card-list"></div>
+          <h3>Active Cards</h3>
+          <div id="activeCards" class="active-card-list"></div>
+        </section>
+
+        <section data-tool-panel="glossary" hidden>
+          <div class="panel-header compact">
+            <div>
+              <h2>Glossary</h2>
+              <p>Full names used by the calculator</p>
+            </div>
+          </div>
+          <input id="glossarySearch" type="search" placeholder="Search glossary" />
+          <div id="glossaryList" class="glossary-list"></div>
+        </section>
+      </aside>
+    </main>
+
+    <dialog id="jsonDialog">
+      <div class="dialog-header">
+        <h2>Generated Battle JSON</h2>
+        <button id="closeJson" type="button">Close</button>
+      </div>
+      <textarea id="jsonPreview" spellcheck="false"></textarea>
+    </dialog>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
