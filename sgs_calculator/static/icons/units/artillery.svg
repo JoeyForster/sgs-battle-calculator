@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">Artillery unit icon</title>
+  <rect width="48" height="48" rx="10" fill="#3b2f25"/>
+  <path d="M14 31l15-11 3 4-14 12z" fill="#f6c177" stroke="#fff7ed" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M28 21l9-4" stroke="#fff7ed" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="18" cy="35" r="5" fill="#111827" stroke="#fff7ed" stroke-width="2"/>
+  <path d="M31 29l5 8" stroke="#fff7ed" stroke-width="3" stroke-linecap="round"/>
+</svg>

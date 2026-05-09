@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-labelledby="title">
+  <title id="title">Fortification trait icon</title>
+  <path d="M4 20V8h4V5h3v3h2V5h3v3h4v12z" fill="#94a3b8"/>
+  <path d="M9 20v-5a3 3 0 016 0v5" fill="#475569"/>
+</svg>

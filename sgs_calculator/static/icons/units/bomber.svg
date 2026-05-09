@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">Bomber aircraft icon</title>
+  <rect width="48" height="48" rx="10" fill="#24314d"/>
+  <path d="M24 7l6 17 12 5-2 5-12-2-4 9-4-9-12 2-2-5 12-5z" fill="#c7d2fe" stroke="#eef2ff" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M19 35h10M21 39h6" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+</svg>

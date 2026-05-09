@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 44" role="img" aria-labelledby="title">
+  <title id="title">Serbia flag</title>
+  <rect width="64" height="44" rx="6" fill="#c6363c"/>
+  <path d="M0 14.67h64v14.66H0z" fill="#0c4076"/>
+  <path d="M0 29.33h64V44H0z" fill="#fff"/>
+  <path d="M18 11h14v20H18z" fill="#f8fafc" stroke="#fbbf24" stroke-width="2"/>
+  <path d="M25 15l4 5-4 7-4-7z" fill="#c6363c"/>
+</svg>

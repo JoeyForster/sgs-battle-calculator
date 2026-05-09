@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 44" role="img" aria-labelledby="title">
+  <title id="title">Fallback flag</title>
+  <rect width="64" height="44" rx="6" fill="#1f2937"/>
+  <path d="M12 12h40v20H12z" fill="#334155" stroke="#cbd5e1" stroke-width="2"/>
+  <path d="M17 17h30M17 22h22M17 27h26" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 44" role="img" aria-labelledby="title">
+  <title id="title">United States flag</title>
+  <rect width="64" height="44" rx="6" fill="#fff"/>
+  <g fill="#b22234">
+    <path d="M0 0h64v3.38H0zM0 6.77h64v3.38H0zM0 13.54h64v3.38H0zM0 20.31h64v3.38H0zM0 27.08h64v3.38H0zM0 33.85h64v3.38H0zM0 40.62h64V44H0z"/>
+  </g>
+  <path d="M0 0h29v23.7H0z" fill="#3c3b6e"/>
+  <g fill="#fff">
+    <circle cx="5" cy="4" r="1.1"/><circle cx="12" cy="4" r="1.1"/><circle cx="19" cy="4" r="1.1"/><circle cx="26" cy="4" r="1.1"/>
+    <circle cx="8.5" cy="9" r="1.1"/><circle cx="15.5" cy="9" r="1.1"/><circle cx="22.5" cy="9" r="1.1"/>
+    <circle cx="5" cy="14" r="1.1"/><circle cx="12" cy="14" r="1.1"/><circle cx="19" cy="14" r="1.1"/><circle cx="26" cy="14" r="1.1"/>
+    <circle cx="8.5" cy="19" r="1.1"/><circle cx="15.5" cy="19" r="1.1"/><circle cx="22.5" cy="19" r="1.1"/>
+  </g>
+</svg>

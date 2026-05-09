@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">Cavalry unit icon</title>
+  <rect width="48" height="48" rx="10" fill="#33291e"/>
+  <path d="M14 31c4-8 12-10 20-5l2 7h-6l-2-4h-9l-2 4h-5z" fill="#d6a15f" stroke="#fff7ed" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M30 22l4-6 5 2-3 7" fill="#d6a15f" stroke="#fff7ed" stroke-width="2" stroke-linejoin="round"/>
+</svg>

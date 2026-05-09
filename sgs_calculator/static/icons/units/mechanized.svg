@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">Mechanized unit icon</title>
+  <rect width="48" height="48" rx="10" fill="#243227"/>
+  <path d="M9 31h30l-3 6H12zM14 22h18l6 9H10z" fill="#86efac" stroke="#f0fdf4" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M18 22v9M27 22v9" stroke="#166534" stroke-width="2"/>
+  <circle cx="17" cy="37" r="2" fill="#14532d"/><circle cx="24" cy="37" r="2" fill="#14532d"/><circle cx="31" cy="37" r="2" fill="#14532d"/>
+</svg>

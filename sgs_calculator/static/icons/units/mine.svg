@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">Minefield unit icon</title>
+  <rect width="48" height="48" rx="10" fill="#3a2323"/>
+  <circle cx="24" cy="27" r="10" fill="#ef4444" stroke="#fee2e2" stroke-width="2"/>
+  <circle cx="24" cy="27" r="3" fill="#7f1d1d"/>
+  <path d="M24 10v6M24 38v-4M10 27h6M38 27h-6M14 17l4 4M34 17l-4 4" stroke="#fee2e2" stroke-width="3" stroke-linecap="round"/>
+</svg>

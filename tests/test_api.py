@@ -16,6 +16,14 @@ def test_example_endpoint_returns_battle_json() -> None:
     assert response.json()["meta"]["seed"] == 1941
 
 
+def test_static_icon_assets_are_served() -> None:
+    response = client.get("/static/icons/flags/germany.svg")
+
+    assert response.status_code == 200
+    assert response.headers["content-type"].startswith("image/svg+xml")
+    assert "<svg" in response.text
+
+
 def test_validate_endpoint_accepts_example() -> None:
     response = client.post("/api/validate", json=EXAMPLE_BATTLE)
 

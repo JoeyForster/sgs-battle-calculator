@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-labelledby="title">
+  <title id="title">Recon trait icon</title>
+  <circle cx="8" cy="11" r="4" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="16" cy="11" r="4" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <path d="M11.5 11h1M5 18h14" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

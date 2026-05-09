@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 44" role="img" aria-labelledby="title">
+  <title id="title">Finland flag</title>
+  <rect width="64" height="44" rx="6" fill="#fff"/>
+  <path d="M0 17h64v10H0zM20 0h10v44H20z" fill="#003580"/>
+</svg>

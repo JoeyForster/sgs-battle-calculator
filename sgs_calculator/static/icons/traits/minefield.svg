@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-labelledby="title">
+  <title id="title">Minefield trait icon</title>
+  <circle cx="12" cy="13" r="6" fill="#ef4444"/>
+  <path d="M12 3v4M12 21v-3M3 13h4M21 13h-4M6 7l3 3M18 7l-3 3" stroke="#fee2e2" stroke-width="2" stroke-linecap="round"/>
+</svg>

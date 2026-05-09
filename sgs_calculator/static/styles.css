@@ -462,6 +462,38 @@ body[data-theme="dark"] .metric {
   color: #fff;
   font-size: 12px;
   font-weight: 900;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.22);
+}
+
+.flag img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.flag-fallback {
+  border: 1px solid var(--line);
+}
+
+.unit-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.unit-meta span {
+  min-width: 0;
+}
+
+.type-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.16);
 }
 
 .unit-stats {
@@ -537,12 +569,22 @@ body[data-theme="dark"] .metric {
 }
 
 .trait-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   border-radius: 999px;
-  padding: 3px 7px;
+  min-height: 23px;
+  padding: 3px 8px 3px 5px;
   background: #edf0f3;
   color: var(--muted);
   font-size: 11px;
   font-weight: 750;
+}
+
+.trait-icon {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
 }
 
 body[data-theme="dark"] .trait-row span {

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 44" role="img" aria-labelledby="title">
+  <title id="title">Germany flag</title>
+  <rect width="64" height="44" rx="6" fill="#111827"/>
+  <path d="M0 14.67h64v14.66H0z" fill="#dd1f2d"/>
+  <path d="M0 29.33h64V44H0z" fill="#f6c945"/>
+</svg>

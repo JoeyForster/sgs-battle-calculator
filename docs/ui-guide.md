@@ -33,6 +33,8 @@ Each unit has:
 
 Use the attacker/defender buttons on a unit card to stage it into the current battle.
 
+Country flags, unit type icons, and trait icons appear on unit cards when the country/type/trait is recognized. Custom countries fall back to a readable two-letter marker.
+
 ## Health Bars
 
 Health bars show `Current Health / Maximum Health`.

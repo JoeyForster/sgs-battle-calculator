@@ -1,4 +1,5 @@
 const STORAGE_KEY = "sgs-turn-calculator-state-v3";
+const ASSET_VERSION = "icons-20260508";
 
 const statLabels = {
   currentHealth: "Current Health",
@@ -11,6 +12,99 @@ const statLabels = {
   battleMorale: "Battle Morale",
   combatFactor: "Combat Factor",
   victoryPoints: "Victory Points",
+};
+
+const iconBase = "/static/icons";
+
+const countryIcons = {
+  albania: "flags/albania.svg",
+  "austria-hungary": "flags/austria-hungary.svg",
+  "austria hungary": "flags/austria-hungary.svg",
+  bulgaria: "flags/bulgaria.svg",
+  commonwealth: "flags/commonwealth.svg",
+  finland: "flags/finland.svg",
+  france: "flags/france.svg",
+  germany: "flags/germany.svg",
+  "german east africa": "flags/german-east-africa.svg",
+  italy: "flags/italy.svg",
+  japan: "flags/japan.svg",
+  mexico: "flags/mexico.svg",
+  romania: "flags/romania.svg",
+  russia: "flags/russia.svg",
+  serbia: "flags/serbia.svg",
+  "soviet union": "flags/soviet-union.svg",
+  turkey: "flags/turkey.svg",
+  "ottoman empire": "flags/turkey.svg",
+  "united kingdom": "flags/united-kingdom.svg",
+  "british empire": "flags/british-empire.svg",
+  "united states": "flags/united-states.svg",
+  "united states of america": "flags/united-states.svg",
+  usa: "flags/united-states.svg",
+  us: "flags/united-states.svg",
+  uk: "flags/united-kingdom.svg",
+};
+
+const unitTypeIcons = {
+  standard: "units/standard.svg",
+  armor: "units/armor.svg",
+  artillery: "units/artillery.svg",
+  mine: "units/mine.svg",
+  fighter: "units/fighter.svg",
+  bomber: "units/bomber.svg",
+  cas: "units/cas.svg",
+  cavalry: "units/cavalry.svg",
+  mechanized: "units/mechanized.svg",
+  support: "units/support.svg",
+};
+
+const traitIcons = {
+  air: "traits/air.svg",
+  air_support: "traits/air.svg",
+  ambush: "traits/ambush.svg",
+  anti_air: "traits/anti-air.svg",
+  armor: "traits/armor.svg",
+  artillery: "traits/artillery.svg",
+  breakthrough: "traits/breakthrough.svg",
+  cavalry: "traits/cavalry.svg",
+  cav: "traits/cavalry.svg",
+  dive_bomber: "traits/land-attack.svg",
+  elite: "traits/elite.svg",
+  fighter_bomber: "traits/land-attack.svg",
+  fortification: "traits/fortification.svg",
+  infantry: "traits/infantry.svg",
+  land_attack: "traits/land-attack.svg",
+  mechanized: "traits/mechanized.svg",
+  mechanised: "traits/mechanized.svg",
+  mine: "traits/minefield.svg",
+  minefield: "traits/minefield.svg",
+  pursuit: "traits/pursuit.svg",
+  recon: "traits/recon.svg",
+  reconnaissance: "traits/recon.svg",
+};
+
+const traitLabels = {
+  air: "Air",
+  air_support: "Air Support",
+  ambush: "Ambush",
+  anti_air: "Anti-Air",
+  armor: "Armor",
+  artillery: "Artillery",
+  breakthrough: "Breakthrough",
+  cavalry: "Cavalry",
+  cav: "Cavalry",
+  dive_bomber: "Dive Bomber",
+  elite: "Elite",
+  fighter_bomber: "Fighter Bomber",
+  fortification: "Fortification",
+  infantry: "Infantry",
+  land_attack: "Land Attack",
+  mechanized: "Mechanized",
+  mechanised: "Mechanized",
+  mine: "Mine",
+  minefield: "Minefield",
+  pursuit: "Pursuer",
+  recon: "Recon",
+  reconnaissance: "Reconnaissance",
 };
 
 const terrainPresets = [
@@ -611,10 +705,13 @@ function renderLibraryUnit(item) {
   return `
     <article class="unit-card ${item.side}">
       <div class="unit-card-main">
-        <div class="flag">${flagText(item)}</div>
+        ${flagIcon(item)}
         <div>
           <h3>${escapeHtml(item.name)}</h3>
-          <p>${escapeHtml(item.country || item.side)} · ${escapeHtml(typeLabel(item))}</p>
+          <p class="unit-meta">
+            ${unitTypeIcon(item)}
+            <span>${escapeHtml(item.country || sideName(item.side))} · ${escapeHtml(typeLabel(item))}</span>
+          </p>
         </div>
       </div>
       ${healthBar(item)}
@@ -627,7 +724,7 @@ function renderLibraryUnit(item) {
         ${statPill(statLabels.moraleFactor, item.morale)}
         ${statPill(statLabels.rateOfFire, item.rof)}
       </div>
-      <div class="trait-row">${item.traits.map((trait) => `<span>${escapeHtml(trait)}</span>`).join("")}</div>
+      ${renderTraitRow(item.traits)}
       <div class="unit-actions">
         <button type="button" data-action="stage-attacker" data-id="${item.id}" ${inAttack ? "disabled" : ""}>Add Attacker</button>
         <button type="button" data-action="stage-defender" data-id="${item.id}" ${inDefense ? "disabled" : ""}>Add Defender</button>
@@ -659,10 +756,13 @@ function renderStack(side) {
     return `
       <article class="${classes}">
         <div class="unit-card-main">
-          <div class="flag">${flagText(item)}</div>
+          ${flagIcon(item)}
           <div>
             <h3>${escapeHtml(item.name)}</h3>
-            <p>${escapeHtml(typeLabel(item))} · ${escapeHtml(item.traits.join(", "))}</p>
+            <p class="unit-meta">
+              ${unitTypeIcon(item)}
+              <span>${escapeHtml(typeLabel(item))} · ${escapeHtml(traitSummary(item.traits))}</span>
+            </p>
           </div>
         </div>
         ${projectedStatusBadge(item, preview)}
@@ -1202,6 +1302,54 @@ function flagText(item) {
   return source.slice(0, 2).toUpperCase();
 }
 
+function flagIcon(item) {
+  const label = item.country || sideName(item.side);
+  const icon = countryIcons[normalizeIconKey(label)];
+  if (!icon) {
+    return `<div class="flag flag-fallback" title="${escapeHtml(label)}">${escapeHtml(flagText(item))}</div>`;
+  }
+  return `
+    <div class="flag" title="${escapeHtml(label)}">
+      <img src="${iconUrl(icon)}" alt="${escapeHtml(label)} flag" loading="lazy" />
+    </div>
+  `;
+}
+
+function unitTypeIcon(item) {
+  const icon = unitTypeIcons[unitTypeIconKey(item)] || unitTypeIcons.standard;
+  const label = typeLabel(item);
+  return `<img class="type-icon" src="${iconUrl(icon)}" alt="" title="${escapeHtml(label)}" loading="lazy" />`;
+}
+
+function unitTypeIconKey(item) {
+  if (item.type && unitTypeIcons[item.type]) return item.type;
+  if (item.traits.includes("cavalry") || item.traits.includes("cav")) return "cavalry";
+  if (item.traits.includes("mechanized") || item.traits.includes("mechanised")) return "mechanized";
+  if (item.role === "support") return "support";
+  return "standard";
+}
+
+function renderTraitRow(traits) {
+  if (!traits.length) return emptyState("No traits.");
+  return `<div class="trait-row">${traits.map(renderTraitChip).join("")}</div>`;
+}
+
+function renderTraitChip(trait) {
+  const key = normalizeTraitKey(trait);
+  const icon = traitIcons[key] || traitIcons.generic;
+  const label = traitLabels[key] || titleCaseTrait(trait);
+  return `
+    <span title="${escapeHtml(label)}">
+      <img class="trait-icon" src="${iconUrl(icon)}" alt="" loading="lazy" />
+      ${escapeHtml(label)}
+    </span>
+  `;
+}
+
+function traitSummary(traits) {
+  return traits.map((trait) => traitLabels[normalizeTraitKey(trait)] || titleCaseTrait(trait)).join(", ");
+}
+
 function typeLabel(item) {
   const domains = { land: "Land", air: "Air", sea: "Sea" };
   const types = {
@@ -1215,6 +1363,36 @@ function typeLabel(item) {
   };
   const role = item.role === "support" ? "Support" : "Combat";
   return `${domains[item.domain] || item.domain} ${role} · ${types[item.type] || item.type}`;
+}
+
+function iconUrl(path) {
+  return `${iconBase}/${path}?v=${ASSET_VERSION}`;
+}
+
+function normalizeIconKey(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replaceAll("_", " ")
+    .replace(/\s+/g, " ");
+}
+
+function normalizeTraitKey(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replaceAll("-", "_")
+    .replace(/\s+/g, "_");
+}
+
+function titleCaseTrait(value) {
+  return String(value || "")
+    .replaceAll("_", " ")
+    .replaceAll("-", " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 }
 
 function getTerrain() {

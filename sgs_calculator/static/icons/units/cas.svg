@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">Close air support icon</title>
+  <rect width="48" height="48" rx="10" fill="#17324a"/>
+  <path d="M24 8l5 14 10 4-2 4-9-1-4 8-4-8-9 1-2-4 10-4z" fill="#7dd3fc" stroke="#ecfeff" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="34" cy="34" r="7" fill="none" stroke="#facc15" stroke-width="2"/>
+  <path d="M34 27v14M27 34h14" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+</svg>
